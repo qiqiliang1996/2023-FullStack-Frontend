@@ -6,6 +6,7 @@ import Navbar from 'pages/navbar/Navbar';
 
 import PostsWidget from 'pages/widgets/PostsWidget';
 import UserWidget from 'pages/widgets/UserWidget';
+import baseURL from 'baseURL';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -16,7 +17,7 @@ const ProfilePage = () => {
   const isNonMobileScreens = useMediaQuery('(min-width:1000px)');
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+    const response = await fetch(`${baseURL}/users/${userId}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     });

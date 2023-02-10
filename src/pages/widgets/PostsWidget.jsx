@@ -4,35 +4,45 @@ import { setPosts } from 'state';
 import PostWidget from './PostWidget';
 import { Typography, useTheme } from '@mui/material';
 import WidgetWrapper from 'components/WidgetWrapper';
+import baseURL from 'baseURL';
 
 function PostsWidget({ userId, isProfile = false }) {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
 
+  // console.log('??', posts);
+
   const { palette } = useTheme();
   const main = palette.neutral.main;
-  const primary = palette.primary.main;
+
   const getPosts = async () => {
-    const response = await fetch('http://localhost:3001/posts', {
+    const response = await fetch(`${baseURL}/posts`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
+
+    if (data?.error) {
+      console.log('hi getPosts error', data?.error);
+      return;
+    }
+
     dispatch(setPosts({ posts: data }));
   };
 
   const getUserPosts = async () => {
     // console.log('1 single user posts called');
-    const response = await fetch(
-      `http://localhost:3001/posts/${userId}/posts`,
-      {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const response = await fetch(`${baseURL}/posts/${userId}/posts`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const data = await response.json();
     // console.log('2 data post', data);
+    if (data?.error) {
+      console.log('hi getPosts error', data?.error);
+      return;
+    }
     dispatch(setPosts({ posts: data }));
   };
 

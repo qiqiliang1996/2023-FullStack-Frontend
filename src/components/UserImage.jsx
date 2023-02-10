@@ -20,7 +20,7 @@ const UserImage = ({ image, size = '60px', profileId }) => {
         style={{ objectFit: 'cover', borderRadius: '50%' }}
         width={size}
         height={size}
-        src={`http://localhost:3001/assets/${image}`}
+        src={`/assets/${image}`}
       />
     </Box>
   );

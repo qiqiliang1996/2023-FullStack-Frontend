@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { setFriends } from 'state';
 import FlexBetween from './FlexBetween';
 import UserImage from './UserImage';
+import baseURL from 'baseURL';
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
@@ -12,7 +13,6 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
-
   // console.log(' 11 friends', friends);
 
   const { palette } = useTheme();
@@ -25,16 +25,13 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const isOwnFriend = friends.find((friend) => friend._id === _id);
 
   const patchFriend = async () => {
-    const response = await fetch(
-      `http://localhost:3001/users/${_id}/${friendId}`,
-      {
-        method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const response = await fetch(`${baseURL}/users/${_id}/${friendId}`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
     const data = await response.json();
     dispatch(setFriends({ friends: data }));
   };

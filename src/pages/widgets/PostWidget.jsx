@@ -13,6 +13,7 @@ import WidgetWrapper from 'components/WidgetWrapper';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPost, setPosts } from 'state';
+import baseURL from 'baseURL';
 
 const PostWidget = ({ post }) => {
   // console.log('RELOAD', post);
@@ -45,7 +46,7 @@ const PostWidget = ({ post }) => {
 
   const patchLike = async () => {
     console.log('00 front patchLike called');
-    const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+    const response = await fetch(`${baseURL}/posts/${postId}/like`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -61,17 +62,14 @@ const PostWidget = ({ post }) => {
   const patchDelete = async () => {
     console.log('delete1 ');
 
-    const response = await fetch(
-      `http://localhost:3001/posts/${postId}/delete`,
-      {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userId: loggedInUserId }),
-      }
-    );
+    const response = await fetch(`${baseURL}/posts/${postId}/delete`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: loggedInUserId }),
+    });
     const { allPostsAfterDeletion: posts } = await response.json();
     console.log('DELETE posts', posts);
 
@@ -97,7 +95,7 @@ const PostWidget = ({ post }) => {
           height='auto'
           alt='post'
           style={{ borderRadius: '0.75rem', marginTop: '0.75rem' }}
-          src={`http://localhost:3001/assets/${picturePath}`}
+          src={`/assets/${picturePath}`}
         />
       )}
       <FlexBetween mt='0.25rem'>
