@@ -23,9 +23,8 @@ const registerSchema = yup.object().shape({
   lastName: yup.string().required('required'),
   email: yup.string().email('invalid email').required('required'),
   password: yup.string().min(6).required('required'),
-  location: yup.string().required('required'),
-  occupation: yup.string().required('required'),
-  // picture: yup.string().required('required'),
+  location: yup.string().min(1).required('required'),
+  occupation: yup.string().min(1).required('required'),
 });
 
 const loginSchema = yup.object().shape({
@@ -105,8 +104,6 @@ function Form() {
   };
 
   const login = async (values, onSubmitProps) => {
-    // console.log('2 login called');
-
     const loggedInResponse = await fetch(`${baseURL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -267,6 +264,7 @@ function Form() {
           {/* BUTTONS */}
           <Box>
             <Button
+              disabled={Object.keys(errors).length != 0 ? true : false}
               fullWidth
               type='submit'
               sx={{

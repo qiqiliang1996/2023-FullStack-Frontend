@@ -30,7 +30,8 @@ function LoginPage() {
           variant='h5'
           sx={{ mb: '1.5rem', textAlign: 'center' }}
         >
-          Welcome to Socipedia, the Social Media for Sociopaths!
+          Welcome to Qiqi's fullstack website, please contact me if you have
+          questions!
         </Typography>
         <Form />
       </Box>
