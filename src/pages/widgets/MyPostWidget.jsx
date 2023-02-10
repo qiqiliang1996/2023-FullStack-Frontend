@@ -39,6 +39,9 @@ function MyPostWidget({ userId, picturePath }) {
   const medium = palette.neutral.medium;
 
   const handlePost = async () => {
+    console.log('1!! image', image);
+    // return;
+
     if (!post) {
       alert('Please insert post description before post.');
       return;
@@ -58,7 +61,10 @@ function MyPostWidget({ userId, picturePath }) {
       body: formData,
     });
     const posts = await response.json();
-    console.log('1GOOD! posts', posts);
+    if (posts?.error) {
+      console.log('1GOOD! posts', posts);
+      return;
+    }
 
     await dispatch(setPosts({ posts }));
     setImage(null);
