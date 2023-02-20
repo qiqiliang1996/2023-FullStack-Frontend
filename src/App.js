@@ -12,9 +12,7 @@ import { themeSettings } from 'theme';
 
 function App() {
   // const mode = useSelector((state) => state.mode);
-  const { user, mode, token } = useSelector((state) => state);
-  // console.log('1 -- App.js page user,', user);
-
+  const { mode, token } = useSelector((state) => state);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   return (

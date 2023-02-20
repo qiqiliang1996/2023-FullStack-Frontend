@@ -22,10 +22,12 @@ const ProfilePage = () => {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
+    // console.log('!! ProfilePageuser data ', data);
     setUser(data);
   };
 
   useEffect(() => {
+    // console.log('useEffect');
     getUser();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

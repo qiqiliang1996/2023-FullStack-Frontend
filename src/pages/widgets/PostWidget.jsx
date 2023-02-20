@@ -138,7 +138,7 @@ const PostWidget = ({ post }) => {
           {comments.length === 0 && (
             <Typography>There is no comment.</Typography>
           )}
-          {comments.length != 0 && <Divider />}
+          {comments.length !== 0 && <Divider />}
         </Box>
       )}
     </WidgetWrapper>

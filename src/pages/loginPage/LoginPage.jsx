@@ -14,7 +14,7 @@ function LoginPage() {
         textAlign='center'
       >
         <Typography fontWeight='bold' fontSize='32px' color='primary'>
-          Qiqi's FullStack
+          Qiqi's FullStack Project
         </Typography>
       </Box>
 
@@ -30,7 +30,7 @@ function LoginPage() {
           variant='h5'
           sx={{ mb: '1.5rem', textAlign: 'center' }}
         >
-          Welcome to Qiqi's fullstack website, please contact me if you have
+          Welcome to my fullstack website, please contact me if you have
           questions!
         </Typography>
         <Form />

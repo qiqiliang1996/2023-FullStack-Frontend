@@ -1,7 +1,7 @@
 import { Box, useMediaQuery } from '@mui/material';
 import Navbar from 'pages/navbar/Navbar';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import UserWidget from 'pages/widgets/UserWidget';
 import MyPostWidget from 'pages/widgets/MyPostWidget';
 import PostsWidget from 'pages/widgets/PostsWidget';

@@ -50,6 +50,7 @@ const initialValuesLogin = {
 function Form() {
   const [pageType, setPageType] = useState('login');
   const { palette } = useTheme();
+  // console.log('!!palette', palette);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery('(min-width:600px)');
@@ -110,7 +111,7 @@ function Form() {
       body: JSON.stringify(values),
     });
     const loggedInResult = await loggedInResponse.json();
-    console.log('3 loggedInResult', loggedInResult);
+    // console.log('3 loggedInResult', loggedInResult);
 
     if (loggedInResult?.error) {
       alert(loggedInResult?.error.message);
@@ -205,6 +206,7 @@ function Form() {
                 <Box
                   gridColumn='span 4'
                   border={`1px solid ${palette.neutral.medium}`}
+                  // border={`1px solid ${palette.primary[300]}`}
                   borderRadius='5px'
                   p='1rem'
                   label='picture'
@@ -264,7 +266,7 @@ function Form() {
           {/* BUTTONS */}
           <Box>
             <Button
-              disabled={Object.keys(errors).length != 0 ? true : false}
+              disabled={Object.keys(errors).length !== 0 ? true : false}
               fullWidth
               type='submit'
               sx={{

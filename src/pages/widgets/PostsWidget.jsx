@@ -22,6 +22,7 @@ function PostsWidget({ userId, isProfile = false }) {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
+    console.log('ALL posts data', data);
 
     if (data?.error) {
       console.log('hi getPosts error', data?.error);
@@ -56,14 +57,14 @@ function PostsWidget({ userId, isProfile = false }) {
 
   return (
     <>
-      {posts.length === 0 ? (
+      {posts?.length === 0 ? (
         <WidgetWrapper m='2rem 0'>
           <Typography color={main} fontWeight='500'>
             This User does't have any post.
           </Typography>
         </WidgetWrapper>
       ) : (
-        posts.map((post) => <PostWidget key={post._id} post={post} />)
+        posts?.map((post) => <PostWidget key={post._id} post={post} />)
       )}
     </>
   );
