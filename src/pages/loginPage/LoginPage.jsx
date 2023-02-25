@@ -30,8 +30,7 @@ function LoginPage() {
           variant='h5'
           sx={{ mb: '1.5rem', textAlign: 'center' }}
         >
-          Welcome to my fullstack website, please contact me if you have
-          questions!
+          Test Account: test1@gmail.com | Password:123456
         </Typography>
         <Form />
       </Box>
