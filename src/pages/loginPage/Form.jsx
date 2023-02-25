@@ -49,6 +49,8 @@ const initialValuesLogin = {
 
 function Form() {
   const [pageType, setPageType] = useState('login');
+  const [loading, setLoading] = useState(false);
+
   const { palette } = useTheme();
   // console.log('!!palette', palette);
   const dispatch = useDispatch();
@@ -104,7 +106,12 @@ function Form() {
     navigate('/home');
   };
 
+  const handleLoading = (status) => {
+    setLoading(status);
+  };
+
   const login = async (values, onSubmitProps) => {
+    handleLoading(true);
     const loggedInResponse = await fetch(`${baseURL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -115,6 +122,8 @@ function Form() {
 
     if (loggedInResult?.error) {
       alert(loggedInResult?.error.message);
+      handleLoading(false);
+
       return;
     }
 
@@ -125,6 +134,7 @@ function Form() {
         token: loggedInResult.token,
       })
     );
+    handleLoading(false);
     navigate('/home');
   };
 
@@ -265,20 +275,37 @@ function Form() {
 
           {/* BUTTONS */}
           <Box>
-            <Button
-              disabled={Object.keys(errors).length !== 0 ? true : false}
-              fullWidth
-              type='submit'
-              sx={{
-                m: '2rem 0',
-                p: '1rem',
-                backgroundColor: palette.primary.main,
-                color: palette.background.alt,
-                '&:hover': { color: palette.primary.main },
-              }}
-            >
-              {isLogin ? 'LOGIN' : 'REGISTER'}
-            </Button>
+            {loading ? (
+              <Button
+                disabled={Object.keys(errors).length !== 0 ? true : false}
+                fullWidth
+                type='submit'
+                sx={{
+                  m: '2rem 0',
+                  p: '1rem',
+                  backgroundColor: palette.primary.main,
+                  color: palette.background.alt,
+                  '&:hover': { color: palette.primary.main },
+                }}
+              >
+                Loading, Please wait....
+              </Button>
+            ) : (
+              <Button
+                disabled={Object.keys(errors).length !== 0 ? true : false}
+                fullWidth
+                type='submit'
+                sx={{
+                  m: '2rem 0',
+                  p: '1rem',
+                  backgroundColor: palette.primary.main,
+                  color: palette.background.alt,
+                  '&:hover': { color: palette.primary.main },
+                }}
+              >
+                {isLogin ? 'LOGIN' : 'REGISTER'}
+              </Button>
+            )}
             <Typography
               onClick={() => {
                 setPageType(isLogin ? 'register' : 'login');
